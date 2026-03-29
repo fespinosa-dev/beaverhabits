@@ -9,14 +9,6 @@ mkdir -p .user
 if [ "$1" = "prd" ]; then
     echo "Starting Uvicorn server in production mode..."
     export ENV=production
-    # Use /data for database to ensure writable path independent of volume mounts
-    if [ -z "$DATABASE_URL" ]; then
-        mkdir -p /data
-        chmod 755 /data
-        touch /data/habits.db && chmod 644 /data/habits.db
-        export DATABASE_URL="sqlite+aiosqlite:////data/habits.db"
-    fi
-    echo "DATABASE_URL: $DATABASE_URL"
     # Set nicegui storage path to avoid permission issues
     if [ -z "$NICEGUI_STORAGE_PATH" ]; then
         export NICEGUI_STORAGE_PATH=".user/.nicegui"
