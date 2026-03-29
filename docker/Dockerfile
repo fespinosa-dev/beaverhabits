@@ -39,7 +39,8 @@ COPY start.sh .
 COPY beaverhabits ./beaverhabits
 COPY statics ./statics
 COPY healthcheck.py .
-RUN chmod -R g+w /app && \
+RUN mkdir -p /app/.user && \
+    chmod -R g+w /app && \
     chown -R nobody /app
 USER nobody
 
