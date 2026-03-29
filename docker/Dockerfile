@@ -39,9 +39,10 @@ COPY start.sh .
 COPY beaverhabits ./beaverhabits
 COPY statics ./statics
 COPY healthcheck.py .
-RUN mkdir -p /app/.user && \
+RUN mkdir -p /app/.user /data && \
     chmod -R g+w /app && \
-    chown -R nobody /app
+    chown -R nobody /app && \
+    chown nobody /data
 USER nobody
 
 HEALTHCHECK --interval=30s --timeout=3s --retries=3 \
